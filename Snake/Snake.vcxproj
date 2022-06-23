@@ -113,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Snake.h" />
+    <ClInclude Include="Vec2.h" />
     <ClInclude Include="__vm\.Snake.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>

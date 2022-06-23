@@ -14,6 +14,9 @@
 
 LedControl brd(DIN, CLK, CS);
 
+void Update();
+void Draw();
+
 void setup()
 {
 	brd.shutdown(BRD_ADRESS, false);
@@ -23,4 +26,14 @@ void setup()
 
 void loop()
 {
+}
+
+void Update()
+{
+
+}
+
+void Draw()
+{
+
 }

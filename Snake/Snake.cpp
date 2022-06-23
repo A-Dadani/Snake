@@ -2,5 +2,6 @@
 
 Snake::Snake(LedControl& brd)
 	:
-	brd(brd)
+	brd(brd),
+	size(INITIAL_SIZE)
 {	}
