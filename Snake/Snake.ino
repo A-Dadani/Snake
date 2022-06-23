@@ -1,15 +1,26 @@
-/*
- Name:		Snake.ino
- Created:	6/23/2022 10:15:21 AM
- Author:	der_u
-*/
+//For arduino Mega
 
-// the setup function runs once when you press reset or power the board
-void setup() {
+#include <LedControl.h>
 
+//Define pins used for 8x8 Matrix (SPI)
+#define DIN 51
+#define CS  53
+#define CLK 52
+
+//Define other useful stuff
+#define BRD_ADRESS 0
+#define BRD_INTENSITY 5 //Can go from 0 to 15
+#define BRD_DIMENSIONS 8
+
+LedControl brd(DIN, CLK, CS);
+
+void setup()
+{
+	brd.shutdown(BRD_ADRESS, false);
+	brd.setIntensity(BRD_ADRESS, BRD_INTENSITY);
+	brd.clearDisplay(BRD_ADRESS);
 }
 
-// the loop function runs over and over again until power down or reset
-void loop() {
-  
+void loop()
+{
 }

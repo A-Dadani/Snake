@@ -77,10 +77,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\Snake;B:\Arduino\hardware\arduino\avr\cores\arduino;B:\Arduino\hardware\arduino\avr\variants\mega;B:\Arduino\hardware\tools\avr\\lib\gcc\avr\7.3.0\include;B:\Arduino\hardware\tools\avr\avr\include;B:\Arduino\hardware\tools\avr\\lib\gcc\avr\7.3.0\include;B:\Arduino\hardware\tools\avr\avr\include-fixed;B:\Arduino\hardware\tools\avr\avr\include\avr;B:\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.2\include;B:\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.2\include;B:\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Snake;$(ProjectDir)..\..\..\..\Documents\Arduino\libraries\LedControl-1.0.6\src;B:\Arduino\hardware\arduino\avr\cores\arduino;B:\Arduino\hardware\arduino\avr\variants\mega;B:\Arduino\hardware\tools\avr\\lib\gcc\avr\7.3.0\include;B:\Arduino\hardware\tools\avr\avr\include;B:\Arduino\hardware\tools\avr\\lib\gcc\avr\7.3.0\include;B:\Arduino\hardware\tools\avr\avr\include-fixed;B:\Arduino\hardware\tools\avr\avr\include\avr;B:\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.2\include;B:\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.2\include;B:\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ProjectDir)__vm\.Snake.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
-      <PreprocessorDefinitions>__AVR_atmega2560__;__AVR_ATmega2560__;F_CPU=16000000L;ARDUINO=108016;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__AVR_atmega2560__;__AVR_ATmega2560__;_VMDEBUG=1;F_CPU=16000000L;ARDUINO=108016;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -112,14 +112,18 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Snake.h" />
     <ClInclude Include="__vm\.Snake.vsarduino.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Snake.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties config.Debug.customdebug_mega_atmega2560_debugger_type="universal" />
+      <UserProperties arduino.upload.port="COM6" config.Debug.customdebug_mega_atmega2560_debugger_type="none" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
