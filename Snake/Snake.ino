@@ -30,10 +30,8 @@ void loop()
 
 void Update()
 {
-
 }
 
 void Draw()
 {
-
 }
