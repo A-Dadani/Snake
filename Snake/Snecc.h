@@ -35,6 +35,7 @@ private:
 public:
 	Snake(LedControl& brd, int brdAddress);
 	void SetDirection(Direction dir);
+	Vec2<uint8_t> GetHeadPos() const { return snakeHead.GetPos(); }
 	void Advance();
 	void Draw() const;
 private:

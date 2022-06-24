@@ -32,9 +32,11 @@ Food food(brd, BRD_ADDRESS, RANDOM_PIN, BRD_DIMENSIONS);
 void Update();
 void Draw();
 
-//For update cooldown
+//For update/draw cooldown
 uint16_t lastUpdateT = 0;
 uint16_t lastDrawT = 0;
+
+bool isLost = false;
 
 void setup()
 {
@@ -50,8 +52,8 @@ void setup()
 
 void loop()
 {
-	Update();
-	Draw();
+	if (!isLost) Update();
+	if (!isLost) Draw();
 }
 
 void Update()
@@ -64,6 +66,11 @@ void Update()
 	if (millis() - lastUpdateT > SNAKE_SPEED_dT_MS)
 	{
 		sneck.Advance();
+		if (sneck.GetHeadPos().GetX() >= BRD_DIMENSIONS ||
+			sneck.GetHeadPos().GetY() >= BRD_DIMENSIONS)
+		{
+			isLost = true;
+		}
 		lastUpdateT = millis();
 	}
 }
