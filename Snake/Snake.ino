@@ -3,6 +3,9 @@
 #include <LedControl.h>
 #include <stdint.h>
 #include "Snecc.h"
+#include "Food.h"
+
+//!!DO NOT USE PIN 2 IT IS USED FOR RANDOM NUMBER GENERATION!!
 
 //Define pins used for buttons
 #define CNTRL_UP 22
@@ -20,9 +23,11 @@
 #define BRD_INTENSITY 5 //Can go from 0 to 15
 #define BRD_DIMENSIONS 8
 #define SNAKE_SPEED_dT_MS 300
+#define RANDOM_PIN 2
 
 LedControl brd(DIN, CLK, CS);
 Snake sneck(brd, BRD_ADDRESS);
+Food food(brd, BRD_ADDRESS, RANDOM_PIN, BRD_DIMENSIONS);
 
 void Update();
 void Draw();
@@ -36,6 +41,7 @@ void setup()
 	brd.shutdown(BRD_ADDRESS, false);
 	brd.setIntensity(BRD_ADDRESS, BRD_INTENSITY);
 	brd.clearDisplay(BRD_ADDRESS);
+	randomSeed(analogRead(RANDOM_PIN));
 	pinMode(CNTRL_UP, INPUT);
 	pinMode(CNTRL_RIGHT, INPUT);
 	pinMode(CNTRL_DOWN, INPUT);
@@ -54,6 +60,7 @@ void Update()
 	else if (digitalRead(CNTRL_RIGHT)) sneck.SetDirection(Snake::Direction::right);
 	else if (digitalRead(CNTRL_DOWN)) sneck.SetDirection(Snake::Direction::down);
 	else if (digitalRead(CNTRL_LEFT)) sneck.SetDirection(Snake::Direction::left);
+
 	if (millis() - lastUpdateT > SNAKE_SPEED_dT_MS)
 	{
 		sneck.Advance();
@@ -67,6 +74,7 @@ void Draw()
 	{
 		brd.clearDisplay(BRD_ADDRESS);
 		sneck.Draw();
+		food.Draw();
 		lastDrawT = millis();
 	}
 }
