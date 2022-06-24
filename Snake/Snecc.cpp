@@ -23,8 +23,16 @@ Snake::Snake(LedControl& brd, int brdAddress)
 	brdAddress(brdAddress)
 {
 	segStack = (Snake::Segment*)calloc(INITIAL_SIZE, sizeof(Snake::Segment));
-	for (int i = 0; i < INITIAL_SIZE; ++i)
+	for (uint8_t i = 0; i < INITIAL_SIZE; ++i)
 	{
 		segStack[i] = Segment(brd, brdAddress, Vec2<uint8_t>(STARTING_POS_X, STARTING_POS_Y - i));
+	}
+}
+
+void Snake::Draw() const
+{
+	for (uint8_t i = 0; i < INITIAL_SIZE; ++i)
+	{
+		segStack[i].Draw();
 	}
 }

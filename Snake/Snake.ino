@@ -1,6 +1,7 @@
 //For arduino Mega
 
 #include <LedControl.h>
+#include "Snecc.h"
 
 //Define pins used for 8x8 Matrix (SPI)
 #define DIN 51
@@ -13,6 +14,7 @@
 #define BRD_DIMENSIONS 8
 
 LedControl brd(DIN, CLK, CS);
+Snake sneck(brd, BRD_ADDRESS);
 
 void Update();
 void Draw();
