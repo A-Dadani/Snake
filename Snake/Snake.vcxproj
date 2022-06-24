@@ -112,12 +112,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Snake.h" />
+    <ClInclude Include="Snecc.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="__vm\.Snake.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Snake.cpp" />
+    <ClCompile Include="Snecc.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
