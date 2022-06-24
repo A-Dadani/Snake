@@ -11,12 +11,21 @@
 
 class Snake
 {
+public:
+	enum class Direction
+	{
+		left,
+		right,
+		up,
+		down
+	};
 private:
 	class Segment
 	{
 	public:
 		Segment(LedControl& brd, int brdAddress, Vec2<uint8_t> pos);
 		Vec2<uint8_t> GetPos() const { return pos; }
+		void SetPos(const Vec2<uint8_t>& newPos);
 		void Draw() const;
 	private:
 		LedControl* pbrd;
@@ -25,11 +34,15 @@ private:
 	};
 public:
 	Snake(LedControl& brd, int brdAddress);
+	void SetDirection(Direction dir);
+	void Advance();
 	void Draw() const;
 private:
 	LedControl& brd;
-	uint8_t size; //Max size is 64 don't need more than a byte
-	Vec2<uint8_t> headPos;
-	Segment* segStack = nullptr;
 	const int brdAddress;
+	uint8_t size; //Max size is 64 don't need more than a byte
+	Segment* segStack = nullptr;
+	Segment snakeHead;
+	Direction snakeDirection;
+	uint8_t nextSegmentRotation;
 };
