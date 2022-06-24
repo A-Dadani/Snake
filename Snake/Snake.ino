@@ -67,7 +67,8 @@ void Update()
 	{
 		sneck.Advance();
 		if (sneck.GetHeadPos().GetX() >= BRD_DIMENSIONS ||
-			sneck.GetHeadPos().GetY() >= BRD_DIMENSIONS)
+			sneck.GetHeadPos().GetY() >= BRD_DIMENSIONS ||
+			sneck.IsCollidingWithSelf())
 		{
 			isLost = true;
 		}

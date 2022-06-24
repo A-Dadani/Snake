@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include "Vec2.h"
 
-#define INITIAL_SIZE 3
+#define INITIAL_SIZE 5
 #define STARTING_POS_X 4
 #define STARTING_POS_Y 4
 
@@ -36,6 +36,7 @@ public:
 	Snake(LedControl& brd, int brdAddress);
 	void SetDirection(Direction dir);
 	Vec2<uint8_t> GetHeadPos() const { return snakeHead.GetPos(); }
+	bool IsCollidingWithSelf() const;
 	void Advance();
 	void Draw() const;
 private:
@@ -44,6 +45,7 @@ private:
 	uint8_t size; //Max size is 64 don't need more than a byte
 	Segment* segStack = nullptr;
 	Segment snakeHead;
+	uint8_t indexOfHeadInStack;
 	Direction snakeDirection;
 	uint8_t nextSegmentRotation;
 };

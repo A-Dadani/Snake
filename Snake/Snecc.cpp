@@ -28,7 +28,8 @@ Snake::Snake(LedControl& brd, int brdAddress)
 	brdAddress(brdAddress),
 	snakeDirection(Snake::Direction::down),
 	nextSegmentRotation(size - 1),
-	snakeHead(segStack[0])
+	snakeHead(segStack[0]),
+	indexOfHeadInStack(0)
 {
 	segStack = (Snake::Segment*)calloc(INITIAL_SIZE, sizeof(Snake::Segment));
 	for (uint8_t i = 0; i < INITIAL_SIZE; ++i)
@@ -51,6 +52,19 @@ void Snake::SetDirection(Snake::Direction dir)
 	snakeDirection = dir;
 }
 
+bool Snake::IsCollidingWithSelf() const
+{
+	for (uint8_t i = 0; i < size; ++i)
+	{
+		if (i != indexOfHeadInStack &&
+			snakeHead.GetPos() == segStack[i].GetPos())
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 void Snake::Advance()
 {
 	switch (snakeDirection)
@@ -69,6 +83,7 @@ void Snake::Advance()
 		break;
 	}
 	snakeHead = segStack[nextSegmentRotation];
+	indexOfHeadInStack = nextSegmentRotation;
 	nextSegmentRotation = (nextSegmentRotation ? nextSegmentRotation - 1 : size - 1);
 }
 
