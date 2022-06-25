@@ -52,6 +52,69 @@ void Snake::SetDirection(Snake::Direction dir)
 	snakeDirection = dir;
 }
 
+void Snake::Grow()
+{
+	segStack = (Segment*)realloc(segStack, (size + 1) * sizeof(Segment));
+	segStack[size] = Segment(brd, brdAddress, Vec2<uint8_t>(0, 0));
+	isGrowing = true;
+}
+
+void Snake::Advance()
+{
+	if (isGrowing)
+	{
+		++size;
+		Vec2<uint8_t> tempPos = snakeHead.GetPos();
+		switch (snakeDirection)
+		{
+		case Snake::Direction::left:
+			segStack[indexOfHeadInStack].SetPos(segStack[indexOfHeadInStack].GetPos() - Vec2<uint8_t>(1, 0));
+			break;
+		case Snake::Direction::right:
+			segStack[indexOfHeadInStack].SetPos(segStack[indexOfHeadInStack].GetPos() + Vec2<uint8_t>(1, 0));
+			break;
+		case Snake::Direction::up:
+			segStack[indexOfHeadInStack].SetPos(segStack[indexOfHeadInStack].GetPos() - Vec2<uint8_t>(0, 1));
+			break;
+		case Snake::Direction::down:
+			segStack[indexOfHeadInStack].SetPos(segStack[indexOfHeadInStack].GetPos() + Vec2<uint8_t>(0, 1));
+			break;
+		}
+		snakeHead = segStack[indexOfHeadInStack];
+	
+		for (uint8_t i = indexOfHeadInStack + 1; i < size; ++i)
+		{
+			Vec2<uint8_t> swapTemp;
+			swapTemp = tempPos;
+			tempPos = segStack[i].GetPos();
+			segStack[i].SetPos(swapTemp);
+		}
+
+		isGrowing = false;
+	}
+	else
+	{
+		switch (snakeDirection)
+		{
+		case Snake::Direction::left:
+			segStack[nextSegmentRotation].SetPos(snakeHead.GetPos() - Vec2<uint8_t>(1, 0));
+			break;
+		case Snake::Direction::right:
+			segStack[nextSegmentRotation].SetPos(snakeHead.GetPos() + Vec2<uint8_t>(1, 0));
+			break;
+		case Snake::Direction::up:
+			segStack[nextSegmentRotation].SetPos(snakeHead.GetPos() - Vec2<uint8_t>(0, 1));
+			break;
+		case Snake::Direction::down:
+			segStack[nextSegmentRotation].SetPos(snakeHead.GetPos() + Vec2<uint8_t>(0, 1));
+			break;
+		}
+		snakeHead = segStack[nextSegmentRotation];
+		indexOfHeadInStack = nextSegmentRotation;
+		nextSegmentRotation = (nextSegmentRotation ? nextSegmentRotation - 1 : size - 1);
+	}
+}
+
 bool Snake::IsCollidingWithSelf() const
 {
 	for (uint8_t i = 0; i < size; ++i)
@@ -63,28 +126,6 @@ bool Snake::IsCollidingWithSelf() const
 		}
 	}
 	return false;
-}
-
-void Snake::Advance()
-{
-	switch (snakeDirection)
-	{
-	case Snake::Direction::left:
-		segStack[nextSegmentRotation].SetPos(snakeHead.GetPos() - Vec2<uint8_t>(1, 0));
-		break;
-	case Snake::Direction::right:
-		segStack[nextSegmentRotation].SetPos(snakeHead.GetPos() + Vec2<uint8_t>(1, 0));
-		break;
-	case Snake::Direction::up:
-		segStack[nextSegmentRotation].SetPos(snakeHead.GetPos() - Vec2<uint8_t>(0, 1));
-		break;
-	case Snake::Direction::down:
-		segStack[nextSegmentRotation].SetPos(snakeHead.GetPos() + Vec2<uint8_t>(0, 1));
-		break;
-	}
-	snakeHead = segStack[nextSegmentRotation];
-	indexOfHeadInStack = nextSegmentRotation;
-	nextSegmentRotation = (nextSegmentRotation ? nextSegmentRotation - 1 : size - 1);
 }
 
 void Snake::Draw() const

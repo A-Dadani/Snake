@@ -3,9 +3,10 @@
 #include <LedControl.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <string.h>
 #include "Vec2.h"
 
-#define INITIAL_SIZE 5
+#define INITIAL_SIZE 3
 #define STARTING_POS_X 4
 #define STARTING_POS_Y 4
 
@@ -35,9 +36,10 @@ private:
 public:
 	Snake(LedControl& brd, int brdAddress);
 	void SetDirection(Direction dir);
+	void Grow();
+	void Advance();
 	Vec2<uint8_t> GetHeadPos() const { return snakeHead.GetPos(); }
 	bool IsCollidingWithSelf() const;
-	void Advance();
 	void Draw() const;
 private:
 	LedControl& brd;
@@ -46,6 +48,7 @@ private:
 	Segment* segStack = nullptr;
 	Segment snakeHead;
 	uint8_t indexOfHeadInStack;
+	bool isGrowing = false;
 	Direction snakeDirection;
 	uint8_t nextSegmentRotation;
 };

@@ -40,6 +40,7 @@ bool isLost = false;
 
 void setup()
 {
+	Serial.begin(9600);
 	brd.shutdown(BRD_ADDRESS, false);
 	brd.setIntensity(BRD_ADDRESS, BRD_INTENSITY);
 	brd.clearDisplay(BRD_ADDRESS);
@@ -71,6 +72,11 @@ void Update()
 			sneck.IsCollidingWithSelf())
 		{
 			isLost = true;
+		}
+		if (sneck.GetHeadPos() == food.GetPosition())
+		{
+			sneck.Grow();
+			food.Randomize();
 		}
 		lastUpdateT = millis();
 	}
