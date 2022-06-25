@@ -76,7 +76,10 @@ void Update()
 		if (sneck.GetHeadPos() == food.GetPosition())
 		{
 			sneck.Grow();
-			food.Randomize();
+			do
+			{
+				food.Randomize();
+			} while (sneck.IsInside(food.GetPosition()));
 		}
 		lastUpdateT = millis();
 	}

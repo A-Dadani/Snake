@@ -40,6 +40,7 @@ public:
 	void Advance();
 	Vec2<uint8_t> GetHeadPos() const { return snakeHead.GetPos(); }
 	bool IsCollidingWithSelf() const;
+	bool IsInside(const Vec2<uint8_t>& pos) const;
 	void Draw() const;
 private:
 	LedControl& brd;

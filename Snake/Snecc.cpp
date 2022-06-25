@@ -115,6 +115,18 @@ void Snake::Advance()
 	}
 }
 
+bool Snake::IsInside(const Vec2<uint8_t>& pos) const
+{
+	for (uint8_t i = 0; i < size; ++i)
+	{
+		if (segStack[i].GetPos() == pos)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 bool Snake::IsCollidingWithSelf() const
 {
 	for (uint8_t i = 0; i < size; ++i)
