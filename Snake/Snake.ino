@@ -27,7 +27,7 @@
 
 LedControl brd(DIN, CLK, CS);
 Snake sneck(brd, BRD_ADDRESS);
-Food food(brd, BRD_ADDRESS, RANDOM_PIN, BRD_DIMENSIONS);
+Food food(brd, BRD_ADDRESS, BRD_DIMENSIONS);
 
 void Update();
 void Draw();
@@ -40,15 +40,16 @@ bool isLost = false;
 
 void setup()
 {
-	Serial.begin(9600);
 	brd.shutdown(BRD_ADDRESS, false);
 	brd.setIntensity(BRD_ADDRESS, BRD_INTENSITY);
 	brd.clearDisplay(BRD_ADDRESS);
-	randomSeed(analogRead(RANDOM_PIN));
+	pinMode(RANDOM_PIN, INPUT);
 	pinMode(CNTRL_UP, INPUT);
 	pinMode(CNTRL_RIGHT, INPUT);
 	pinMode(CNTRL_DOWN, INPUT);
 	pinMode(CNTRL_LEFT, INPUT);
+	randomSeed(analogRead(RANDOM_PIN));
+	food.Randomize();
 }
 
 void loop()
