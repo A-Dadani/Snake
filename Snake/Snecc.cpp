@@ -39,6 +39,11 @@ Snake::Snake(LedControl& brd, int brdAddress)
 	snakeHead = segStack[0];
 }
 
+Snake::~Snake()
+{
+	free(segStack);
+}
+
 void Snake::SetDirection(Snake::Direction dir)
 {
 	if ((dir == Snake::Direction::down && snakeDirection == Snake::Direction::up) ||

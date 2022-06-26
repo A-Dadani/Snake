@@ -35,6 +35,7 @@ private:
 	};
 public:
 	Snake(LedControl& brd, int brdAddress);
+	~Snake();
 	void SetDirection(Direction dir);
 	void Grow();
 	void Advance();
